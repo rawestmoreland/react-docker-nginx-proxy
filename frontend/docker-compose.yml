@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  my_app:
+    container_name: my_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+    networks:
+      - proxy
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      VIRTUAL_HOST: ${WWW_DOMAIN},${DOMAIN}
+      LETSENCRYPT_HOST: ${WWW_DOMAIN},${DOMAIN}
+      LETSENCRYPT_EMAIL: ${EMAIL}
+
+networks:
+  proxy:
+    external:
+      name: nginx-proxy

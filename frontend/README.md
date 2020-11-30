@@ -1,0 +1,1 @@
+# A react app deployed with docker using an NGINX reverse-proxy and ssl
